@@ -19,7 +19,10 @@ public class InterfazGUI extends javax.swing.JFrame {
     
     public InterfazGUI() {
         initComponents();
+        minValue.setText(min+"");
+        maxValue.setText(max+"");
         crearMatriz();
+        textUmbral.setText("Umbral: "+ umbral.getValue());
     }
 
     /**
@@ -41,6 +44,7 @@ public class InterfazGUI extends javax.swing.JFrame {
         umbral = new javax.swing.JSlider();
         minValue = new javax.swing.JTextField();
         maxValue = new javax.swing.JTextField();
+        textUmbral = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,28 +89,40 @@ public class InterfazGUI extends javax.swing.JFrame {
 
         jLabel3.setText("Máximo:");
 
-        umbral.setMajorTickSpacing(1);
+        umbral.setMajorTickSpacing(10);
         umbral.setMaximum(0);
         umbral.setMinorTickSpacing(1);
-        umbral.setPaintLabels(true);
         umbral.setPaintTicks(true);
+        umbral.setToolTipText("Umbral");
+        umbral.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        umbral.setValueIsAdjusting(true);
         umbral.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 umbralStateChanged(evt);
             }
         });
 
-        minValue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                minValueActionPerformed(evt);
+        minValue.setToolTipText("Valor (no decimal) mínimo de la matriz");
+        minValue.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                minValueMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                minValueMouseExited(evt);
             }
         });
 
-        maxValue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                maxValueActionPerformed(evt);
+        maxValue.setToolTipText("Valor (no decimal) máximo de la matriz.");
+        maxValue.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                maxValueMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                maxValueMouseExited(evt);
             }
         });
+
+        textUmbral.setText("Umbral:");
 
         javax.swing.GroupLayout panelInferiorLayout = new javax.swing.GroupLayout(panelInferior);
         panelInferior.setLayout(panelInferiorLayout);
@@ -122,7 +138,9 @@ public class InterfazGUI extends javax.swing.JFrame {
                     .addComponent(minValue)
                     .addComponent(maxValue, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
                 .addGap(30, 30, 30)
-                .addComponent(umbral, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(umbral, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textUmbral))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         panelInferiorLayout.setVerticalGroup(
@@ -137,7 +155,8 @@ public class InterfazGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(maxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(maxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textUmbral))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -147,20 +166,19 @@ public class InterfazGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel1))
-                    .addComponent(panelInferior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelSuperior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(panelInferior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelSuperior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addContainerGap(44, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelInferior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,27 +188,51 @@ public class InterfazGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void minValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minValueActionPerformed
-        if(isNumeric(minValue.getText())) 
-            min = Integer.parseInt(minValue.getText());
-        System.out.println("Valor mínimo: " + min);
-        if(max != matriz.getMax()){
-            crearMatriz();
-        }
-    }//GEN-LAST:event_minValueActionPerformed
-
-    private void maxValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxValueActionPerformed
-        if(isNumeric(maxValue.getText())) 
-            max = Integer.parseInt(maxValue.getText());
-        System.out.println("Valor máximo: " + max);
-        if(min != matriz.getMin()){
-            crearMatriz();
-        }
-    }//GEN-LAST:event_maxValueActionPerformed
-
     private void umbralStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_umbralStateChanged
+        textUmbral.setText("Umbral: "+ umbral.getValue());
         actualizarTextArea(matriz.umbral(umbral.getValue()));
     }//GEN-LAST:event_umbralStateChanged
+
+    private void minValueMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minValueMouseExited
+        if(!minValue.getText().isBlank()){
+            if(isNumeric(minValue.getText()) && minValue.getText().length()<5 ){ 
+                String minS = min+"";
+                if(!minValue.getText().equals(minS)){
+                    min = Integer.parseInt(minValue.getText());
+                    crearMatriz();
+                }
+            }else{
+                msgError("Valor mínimo incorrecto (Solo números enteros de 4 dígitos)");
+
+            }
+        }
+        minValue.setText(min+"");
+        minValue.transferFocus();
+    }//GEN-LAST:event_minValueMouseExited
+
+    private void maxValueMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxValueMouseExited
+        if(!maxValue.getText().isBlank()){
+            if(isNumeric(maxValue.getText()) && maxValue.getText().length()<5 ){
+                String maxS = max+"";
+                if(!maxValue.getText().equals(maxS)){
+                    max = Integer.parseInt(maxValue.getText());
+                    crearMatriz();
+                }
+            } else{
+                msgError("Valor máximo incorrecto (Solo números enteros de 4 dígitos)");
+            }
+        }
+        maxValue.setText(max+"");
+        maxValue.transferFocus();
+    }//GEN-LAST:event_maxValueMouseExited
+
+    private void maxValueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxValueMouseClicked
+        maxValue.setText("");
+    }//GEN-LAST:event_maxValueMouseClicked
+
+    private void minValueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minValueMouseClicked
+        minValue.setText("");
+    }//GEN-LAST:event_minValueMouseClicked
 
     /**
      * @param args the command line arguments
@@ -236,18 +278,21 @@ public class InterfazGUI extends javax.swing.JFrame {
         } 
     }
     private void crearMatriz(){
-        if(min < max){
+        if(min <= max){
             matriz.setMin(min);
             matriz.setMax(max);
             matriz.actualizarMatriz();
-            umbral.setMinimum(min);
+            umbral.setMinimum(min-1);
             umbral.setMaximum(max);
-            umbral.setValue(min);
+            umbral.setValue(min-1);
             actualizarTextArea(matriz.toString());
         } else {
-            JOptionPane.showMessageDialog(this, "El valor del campo mínimo ha de ser menor que el valor del campo máximo.");
+            msgError("El valor mínimo debe ser menor o igual al valor máximo.");
         }
-        
+    }
+    
+    private void msgError(String error){
+        JOptionPane.showMessageDialog(this,error);
     }
     
     private void actualizarTextArea(String texto){
@@ -264,6 +309,7 @@ public class InterfazGUI extends javax.swing.JFrame {
     private javax.swing.JPanel panelInferior;
     private javax.swing.JPanel panelSuperior;
     private javax.swing.JTextArea textMatriz;
+    private javax.swing.JLabel textUmbral;
     private javax.swing.JSlider umbral;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
  */
 package com.mycompany.practica3.diu;
 
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +24,7 @@ public class InterfazGUI extends javax.swing.JFrame {
         maxValue.setText(max+"");
         crearMatriz();
         textUmbral.setText("Umbral: "+ umbral.getValue());
+        this.getContentPane().setBackground(Color.getHSBColor(224, 126, 126));
     }
 
     /**
@@ -45,13 +47,20 @@ public class InterfazGUI extends javax.swing.JFrame {
         minValue = new javax.swing.JTextField();
         maxValue = new javax.swing.JTextField();
         textUmbral = new javax.swing.JLabel();
+        authors = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("FiltradorMatrices");
+        setBackground(new java.awt.Color(242, 175, 61));
+        setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 2, 24)); // NOI18N
-        jLabel1.setText("Filtrado de una Matriz Cuadrada");
+        jLabel1.setBackground(new java.awt.Color(153, 0, 153));
+        jLabel1.setFont(new java.awt.Font("Stencil", 2, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 0, 102));
+        jLabel1.setText("FILTRADO DE UNA MATRIZ CUADRADA");
 
-        panelSuperior.setBorder(javax.swing.BorderFactory.createTitledBorder("Matriz 10x10"));
+        panelSuperior.setBackground(new java.awt.Color(224, 126, 126));
+        panelSuperior.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Matriz 10x10", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Stencil", 1, 14), new java.awt.Color(153, 0, 153))); // NOI18N
 
         jScrollPane2.setMaximumSize(new java.awt.Dimension(200, 200));
         jScrollPane2.setMinimumSize(new java.awt.Dimension(200, 200));
@@ -61,6 +70,7 @@ public class InterfazGUI extends javax.swing.JFrame {
 
         textMatriz.setBackground(new java.awt.Color(240, 255, 248));
         textMatriz.setColumns(20);
+        textMatriz.setFont(new java.awt.Font("Monospaced", 1, 13)); // NOI18N
         textMatriz.setRows(5);
         textMatriz.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jScrollPane2.setViewportView(textMatriz);
@@ -83,10 +93,16 @@ public class InterfazGUI extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        panelInferior.setBorder(javax.swing.BorderFactory.createTitledBorder("Configuración"));
+        panelInferior.setBackground(new java.awt.Color(248, 228, 167));
+        panelInferior.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configuración", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Stencil", 1, 14), new java.awt.Color(153, 0, 153))); // NOI18N
+        panelInferior.setForeground(new java.awt.Color(255, 255, 255));
 
+        jLabel2.setFont(new java.awt.Font("Stencil", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setText("Mínimo:");
 
+        jLabel3.setFont(new java.awt.Font("Stencil", 0, 11)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("Máximo:");
 
         umbral.setMajorTickSpacing(10);
@@ -94,7 +110,7 @@ public class InterfazGUI extends javax.swing.JFrame {
         umbral.setMinorTickSpacing(1);
         umbral.setPaintTicks(true);
         umbral.setToolTipText("Umbral");
-        umbral.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        umbral.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         umbral.setValueIsAdjusting(true);
         umbral.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -122,6 +138,8 @@ public class InterfazGUI extends javax.swing.JFrame {
             }
         });
 
+        textUmbral.setFont(new java.awt.Font("Stencil", 1, 14)); // NOI18N
+        textUmbral.setForeground(new java.awt.Color(255, 51, 51));
         textUmbral.setText("Umbral:");
 
         javax.swing.GroupLayout panelInferiorLayout = new javax.swing.GroupLayout(panelInferior);
@@ -154,11 +172,14 @@ public class InterfazGUI extends javax.swing.JFrame {
                     .addComponent(umbral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(maxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textUmbral))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
+
+        authors.setFont(new java.awt.Font("Stencil", 1, 12)); // NOI18N
+        authors.setText("Hecho POr: Borja Álvarez y Esther Zurita");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,22 +188,27 @@ public class InterfazGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(panelInferior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panelSuperior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                        .addComponent(panelSuperior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(197, 197, 197)))
+                    .addComponent(authors))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(panelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelInferior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(authors)
+                .addContainerGap())
         );
 
         pack();
@@ -194,8 +220,8 @@ public class InterfazGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_umbralStateChanged
 
     private void minValueMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minValueMouseExited
-        if(!minValue.getText().isBlank()){
-            if(isNumeric(minValue.getText()) && minValue.getText().length()<5 ){ 
+        if(!minValue.getText().isEmpty()){
+            if(isNumeric(minValue.getText()) && minValue.getText().length()<6 ){ 
                 String minS = min+"";
                 if(!minValue.getText().equals(minS)){
                     min = Integer.parseInt(minValue.getText());
@@ -203,7 +229,6 @@ public class InterfazGUI extends javax.swing.JFrame {
                 }
             }else{
                 msgError("Valor mínimo incorrecto (Solo números enteros de 4 dígitos)");
-
             }
         }
         minValue.setText(min+"");
@@ -211,7 +236,7 @@ public class InterfazGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_minValueMouseExited
 
     private void maxValueMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxValueMouseExited
-        if(!maxValue.getText().isBlank()){
+        if(!maxValue.getText().isEmpty()){
             if(isNumeric(maxValue.getText()) && maxValue.getText().length()<5 ){
                 String maxS = max+"";
                 if(!maxValue.getText().equals(maxS)){
@@ -300,6 +325,7 @@ public class InterfazGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel authors;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

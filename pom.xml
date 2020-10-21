@@ -22,7 +22,7 @@
                     <manifest>
                         <addClasspath>true</addClasspath>
                         <classpathPrefix>lib</classpathPrefix>
-                        <mainClass>practica2.Main</mainClass>
+                        <mainClass>com.mycompany.practica3.diu.Main</mainClass>
                     </manifest>
                   </archive>
                 </configuration>

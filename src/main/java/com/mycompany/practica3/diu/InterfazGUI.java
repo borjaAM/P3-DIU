@@ -6,7 +6,6 @@
 package com.mycompany.practica3.diu;
 
 import java.awt.Color;
-import java.util.Hashtable;
 import javax.swing.JOptionPane;
 
 /**

@@ -237,7 +237,7 @@ public class InterfazGUI extends javax.swing.JFrame {
             }
         }
         minValue.setText(min+"");
-        minValue.transferFocus();
+        minValue.transferFocusBackward();
     }//GEN-LAST:event_minValueMouseExited
 
     private void maxValueMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxValueMouseExited

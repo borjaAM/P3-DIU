@@ -105,9 +105,9 @@ public class InterfazGUI extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("Valor Máximo:");
 
-        umbral.setMajorTickSpacing(50);
+        umbral.setMajorTickSpacing(1);
         umbral.setMaximum(0);
-        umbral.setMinorTickSpacing(1);
+        umbral.setPaintLabels(true);
         umbral.setPaintTicks(true);
         umbral.setToolTipText("Umbral de filtrado de la matriz");
         umbral.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -158,12 +158,10 @@ public class InterfazGUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(maxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelInferiorLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(umbral, javax.swing.GroupLayout.PREFERRED_SIZE, 888, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelInferiorLayout.createSequentialGroup()
                         .addGap(393, 393, 393)
                         .addComponent(textUmbral)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
+            .addComponent(umbral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelInferiorLayout.setVerticalGroup(
             panelInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,9 +172,9 @@ public class InterfazGUI extends javax.swing.JFrame {
                     .addComponent(maxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(minValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(umbral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(umbral, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textUmbral)
                 .addGap(17, 17, 17))
         );
@@ -205,7 +203,7 @@ public class InterfazGUI extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(panelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,13 +310,22 @@ public class InterfazGUI extends javax.swing.JFrame {
             matriz.setMin(min);
             matriz.setMax(max);
             matriz.actualizarMatriz();
-            umbral.setMinimum(min-1);
+            umbral.setMinimum(min);
             umbral.setMaximum(max);
-            umbral.setValue(min-1);
+            umbral.setValue(min);
+            actualizarEtiquetas(String.valueOf(max-min).length());
             actualizarTextArea(matriz.toString());
         } else {
             msgError("El valor mínimo debe ser menor o igual al valor máximo.");
         }
+    }
+    
+    private void actualizarEtiquetas(int escala){
+        if(escala == 1) umbral.createStandardLabels(1, min); umbral.setMajorTickSpacing(1);
+        if(escala == 2) umbral.createStandardLabels(5, min); umbral.setMajorTickSpacing(10); 
+        if(escala == 3) umbral.createStandardLabels(50, min); umbral.setMajorTickSpacing(100);
+        if(escala == 4 && (max-min) <= 5000) umbral.createStandardLabels(250, min); umbral.setMajorTickSpacing(500);
+        if(escala == 4 && (max-min) > 5000) umbral.createStandardLabels(1000, min); umbral.setMajorTickSpacing(2000);
     }
     
     private void msgError(String error){
